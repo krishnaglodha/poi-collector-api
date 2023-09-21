@@ -20,7 +20,8 @@ class ProtectedView(APIView):
         user_id = decoded_payload['user_id']
         user = AppUser.objects.filter(id=user_id).first()
         context = {'user_id': user_id,
-                  'username': user.username}
+                  'email': user.email,
+                  }
         if user.is_superuser:
             context['admin'] = True
         return Response(context, status=status.HTTP_200_OK)
